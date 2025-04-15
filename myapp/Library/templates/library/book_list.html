@@ -1,0 +1,35 @@
+<h2>Library Book Form</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+    <button type="reset">Cancel</button>
+</form>
+
+<hr>
+
+<h3>All Records</h3>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Student Name</th>
+        <th>Book Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Actions</th>
+    </tr>
+    {% for record in records %}
+    <tr>
+        <td>{{ record.id }}</td>
+        <td>{{ record.student_name }}</td>
+        <td>{{ record.book_name }}</td>
+        <td>{{ record.start_date }}</td>
+        <td>{{ record.end_date }}</td>
+        <td>
+            <a href="{% url 'edit_record' record.id %}">Edit</a> |
+            <a href="{% url 'delete_record' record.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
